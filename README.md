@@ -1,2 +1,4 @@
-# web-330
- Bellevue JavaScript II
+# WEB 330 Enterprise JavaScript II
+## Contributors
+*Professor Robert Kumar
+*James Harper
