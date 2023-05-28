@@ -54,7 +54,7 @@ body.dark-theme {
 /**
   Sets the body font of the html document. font-family lists the fonts for the document in order of availability.
 */
-* {
+body {
   font-family: 'Oswald', Verdana, Arial, sans-serif;
 }
 /**
