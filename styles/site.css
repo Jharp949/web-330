@@ -14,21 +14,15 @@
   margin-left: 100px;
   margin-right: 100px;
 }
-/**
 
-*/
 #icon-mode {
   cursor: pointer;
 }
-/**
 
-*/
 #icon-text {
   padding-left: 10px;
 }
-/**
 
-*/
 .pull-right {
   float: right;
 }
