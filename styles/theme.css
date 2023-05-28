@@ -1,0 +1,156 @@
+/**
+  Title: theme.css
+  Author: James Harper
+  Date: 5/27/2023
+  Description: Web 330 - Week 1 - Assignment 1.3
+*/
+
+/**
+
+*/
+body.light-theme {
+  --text-color: #000;
+  --background-color: #fff;
+  --anchor-color: #4f3674;
+  --h1-background-color: #3c275a;
+  --h1-border-color: #d6a800;
+  --heading-background-color: #3c275a;
+  --heading-color: #fff;
+  --heading-border-color: #d6a800;
+  --anchor-hover-color: #4f3674;
+  --anchor-hover-background-color: #d6a800;
+  --card-background-color: #fff;
+  --card-title-color: #4f3674;
+  --btn-background-color: #4f3674;
+  --btn-color: #fff;
+  --btn-hover-background-color: #d6a800;
+  --btn-hover-color: #4f3674;
+  --input-border-color: #ccc;
+}
+
+/**
+
+*/
+body.dark-theme {
+  --text-color: #fafafa;
+  --background-color: #303030;
+  --anchor-color: #fff;
+  --h1-background-color: #9c27b0;
+  --h1-border-color: #9c27b0;
+  --heading-background-color: #424242;
+  --heading-color: #fff;
+  --heading-border-color: #424242;
+  --anchor-hover-color: #d176e1;
+  --anchor-hover-background-color: #303030;
+  --card-background-color: #424242;
+  --card-title-color: #d176e1;
+  --btn-background-color: #d176e1;
+  --btn-color: #fff;
+  --btn-hover-background-color: #7d4787;
+  --btn-hover-color: #fff;
+  --input-border-color: #303030;
+}
+
+/**
+  Sets the body font of the html document. font-family lists the fonts for the document in order of availability.
+*/
+* {
+  font-family: 'Oswald', Verdana, Arial, sans-serif;
+}
+/**
+
+*/
+body {
+  color: var(--text-color);
+  background: var(--background-color);
+}
+/**
+
+*/
+a {
+  color: var(--anchor-color);
+  text-decoration: none;
+}
+/**
+
+*/
+a:hover {
+  background-color: var(--anchor-hover-background-color);
+  color: var(--anchor-hover-color);
+}
+/**
+
+*/
+h1 {
+  color: var(--heading-color);
+  background-color: var(--h1-background-color);
+  padding: 10px;
+  border: solid 1px;
+  border-color: var(--h1-border-color);
+}
+/**
+
+*/
+h2, h3, h4 {
+  color: var(--heading-color);
+  background-color: var(--heading-background-color);
+  padding: 10px;
+  border: solid 1px;
+  border-color: var(--heading-border-color);
+}
+/**
+Assigns properties to any element with the card class. Shadows on the right and bottom with color black. The transition
+property set the time for the effect to take place in seconds.
+*/
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  background-color: var(--card-background-color);
+}
+/**
+Assigns properties to any element with the card-title class. Centers the text within the element, font size becomes
+2em, text color in hex code, font weight adjusts the thickness of the letters.
+*/
+.card-title {
+  text-align: center;
+  font-size: 2em;
+  color: var(--card-title-color);
+  font-weight: 400;
+}
+/**
+Assigns properties to any element with the btn-primary class. Background color to the hex code indicated, text color
+to white.
+*/
+.btn-primary {
+  background-color: var(--btn-background-color);
+  color: var(--btn-color);
+}
+/**
+Assigns properties to any element with the btn-primary class while hovering over the element with the cursor.
+Background color to the hex code indicated, text color to the hex indicated.
+*/
+.btn-primary:hover {
+  background-color: var(--button-hover-background-color);
+  color: var(--btn-hover-color);
+}
+/**
+Assigns properties to any element with the input class. Padding top and bottom to 12px, padding left and right
+to 20px, margin top and bottom to 8px, margin right and left to 0px, removes the default text styling, aligns all
+elements in a horizontal row side by side, creates a border 1px solid with hex code #ccc as the color,
+border radius adjust the four points of the element by rounding them based on px value, creates a border around the
+element within the container.
+*/
+.input {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: var(--input-border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+/**
+
+*/
+.drop-down-menu {
+  border-color: var(--input-border-color);
+}
