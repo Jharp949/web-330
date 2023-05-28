@@ -56,11 +56,6 @@ body.dark-theme {
 */
 body {
   font-family: 'Oswald', Verdana, Arial, sans-serif;
-}
-/**
-
-*/
-body {
   color: var(--text-color);
   background: var(--background-color);
 }
