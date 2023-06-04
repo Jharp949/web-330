@@ -19,6 +19,7 @@ body.light-theme {
   --heading-border-color: #d6a800;
   --anchor-hover-color: #4f3674;
   --anchor-hover-background-color: #d6a800;
+  --anchor-color-visited: #3c275a;
   --card-background-color: #fff;
   --card-title-color: #4f3674;
   --btn-background-color: #4f3674;
@@ -42,6 +43,7 @@ body.dark-theme {
   --heading-border-color: #424242;
   --anchor-hover-color: #d176e1;
   --anchor-hover-background-color: #303030;
+  --anchor-color-visited: #ccc;
   --card-background-color: #424242;
   --card-title-color: #d176e1;
   --btn-background-color: #d176e1;
@@ -119,13 +121,14 @@ to white.
 .btn-primary {
   background-color: var(--btn-background-color);
   color: var(--btn-color);
+  height: 40px;
 }
 /**
 Assigns properties to any element with the btn-primary class while hovering over the element with the cursor.
 Background color to the hex code indicated, text color to the hex indicated.
 */
 .btn-primary:hover {
-  background-color: var(--button-hover-background-color);
+  background-color: var(--btn-hover-background-color);
   color: var(--btn-hover-color);
 }
 /**
@@ -139,7 +142,7 @@ element within the container.
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
-  border: var(--input-border-color);
+  border-color: var(--input-border-color);
   border-radius: 4px;
   box-sizing: border-box;
 }
@@ -148,4 +151,21 @@ element within the container.
 */
 .drop-down-menu {
   border-color: var(--input-border-color);
+}
+/**
+
+*/
+.return-home {
+  color: var(--anchor-color);
+  text-decoration: none;
+}
+
+.return-home:hover {
+  color: var(--anchor-hover-color);
+  background-color: var(--anchor-hover-background-color);
+}
+
+.return-home:visited {
+  color: var(--anchor-color-visited);
+  background-color: var(--anchor-hover-background-color);
 }

@@ -34,6 +34,10 @@
   padding: 10px;
 }
 
+#assign-header {
+  font-size: 1.3em;
+}
+
 .assign-content {
   width: 600px;
   margin: 3% auto 0;
@@ -51,21 +55,24 @@
   color: inherit;
   background-color: inherit;
 }
-
-.return-home {
-  color: #4F3674;
-  text-decoration: none;
+/**
+Assigns properties to any element with the card-content class. Adjust the top and bottom padding to 2px and the
+right and left padding to 16px.
+*/
+.card-content {
+  padding: 2px 16px;
 }
-
-.return-home:hover {
-  background-color: #D6A800;
-  color: #4F3674;
+/**
+Assigns properties to any element with the card class while hovering over the element with the cursor.
+Shadows on the right and bottom with color black.
+*/
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
-
-.return-home:visited {
-  color: #3c275a;
-}
-
+/**
+Assigns properties to any element with the form class. Assign the the display as a grid with the columns set to
+auto. Elements can then be assigned to a space on the page based on the grid column property.
+*/
 .form {
   display: inline-grid;
   grid-template-columns: auto;
@@ -77,4 +84,10 @@
 
 .full-width {
   width: 100%;
+}
+
+#link-container {
+  width: 600px;
+  margin: auto;
+  padding-top: 10px;
 }
