@@ -51,8 +51,8 @@ function results() {
   const phraseLowercase = txtPhrase.toLowerCase();
 
   if (isPalindrome(phraseLowercase) === true) {
-    return assignResults.innerHTML = `<b>${txtPhrase} <u>is</u> a palindrome!</b>`;
+    return assignResults.innerHTML = `${txtPhrase} <u><b>is</b></u> a palindrome!`;
   } else {
-    return assignResults.innerHTML = `<b/>${txtPhrase} <u>is not</u> a palindrome!</b>`;
+    return assignResults.innerHTML = `${txtPhrase} <u><b>is not</b></u> a palindrome!`;
   }
 }
