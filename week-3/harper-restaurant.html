@@ -39,12 +39,12 @@
         <div class="assign-content">
           <div class="card">
             <div class="card-title">Restaurant Menu</div>
-            <div class="card-content">
+            <div class="card-content" id="content-container">
               <div class="card">
                 <div class="card-title">Beverages</div>
                 <div class="card-content">
                   <div class="form">
-                    <div class="form-field" id="beverages">
+                    <div class="form-field options" id="beverages">
                       <label for="soda">Soda ($3.30)</label>
                       <input type="checkbox" name="soda" id="soda" value="3.30">
                       <label for="sweetTea">Sweet Tea ($3.30)</label>
@@ -61,7 +61,7 @@
                 <div class="card-title">Appetizers</div>
                 <div class="card-content">
                   <div class="form">
-                    <div class="form-field" id="appetizers">
+                    <div class="form-field options" id="appetizers">
                       <label for="nachos">Nachos ($6.60)</label>
                       <input type="checkbox" name="nachos" id="nachos" value="6.60">
                       <label for="chipsSalsa">Chips and Salsa ($5.50)</label>
@@ -78,7 +78,7 @@
                 <div class="card-title">Main Courses</div>
                 <div class="card-content">
                   <div class="form">
-                    <div class="form-field" id="main-courses">
+                    <div class="form-field options" id="main-courses">
                       <label for="streetTacos">Street Tacos ($9.70)</label>
                       <input type="checkbox" name="streetTacos" id="streetTacos" value="9.70">
                       <label for="bonelessWings">Boneless Wings ($12.80)</label>
@@ -95,7 +95,7 @@
                 <div class="card-title">Desserts</div>
                 <div class="card-content">
                   <div class="form">
-                    <div class="form-field" id="desserts">
+                    <div class="form-field options" id="desserts">
                       <label for="iceCream">Ice Cream ($4.30)</label>
                       <input type="checkbox" name="iceCream" id="iceCream" value="4.30">
                       <label for="chocolateCake">Chocolate Cake ($5.40)</label>
@@ -108,9 +108,9 @@
                   </div>
                 </div>
               </div>
-              <div class="card-content">
-                <button class= "btn-primary full-width" id="btnOrder">Place Order</button>
-              </div>
+          </div>
+          <div class="card-content">
+            <button class= "btn-primary full-width" id="btnOrder">Place Order</button>
           </div>
         </div>
     </div>
@@ -180,26 +180,25 @@
     </script>
 
     <!-- Imports JS files to the HTML document -->
-    <script type="module">
-      import { Bill, Beverage, Appetizer, MainCourse, Dessert } from "./index.js";
+    <script type='module'>
+      import { Bill, Beverage, Appetizer, MainCourse, Dessert } from './index.js';
 
       document.getElementById('btnOrder').onclick = function() {
 
         const beveragesEl = document.getElementById('beverages');
-        const beverages = beveragesEl.getElementsByTagName('input)');
+        const beverages = beveragesEl.getElementsByTagName('input');
         const appetizersEl = document.getElementById('appetizers');
-        const appetizers = appetizersEl.getElementsByTagName('input)');
+        const appetizers = appetizersEl.getElementsByTagName('input');
         const mainCoursesEl = document.getElementById('main-courses');
-        const mainCourses = mainCoursesEl.getElementsByTagName('input)');
+        const mainCourses = mainCoursesEl.getElementsByTagName('input');
         const dessertsEl = document.getElementById('desserts');
-        const desserts = dessertsEl.getElementsByTagName('input)');
+        const desserts = dessertsEl.getElementsByTagName('input');
 
         let bill = new Bill(beverages, appetizers, mainCourses, desserts);
 
         for (let beverage of beverages) {
           if (beverage.checked) {
             bill.addBeverage(new Beverage(beverage.name, beverage.value));
-            console.log(beverage);
           }
         }
 
@@ -223,7 +222,7 @@
 
         let total = bill.getTotal();
 
-        document.getElementById('order-total').innerHTML = 'Your order total is $' + total;
+        document.getElementById('order-total').innerHTML = 'Your order total is $' + total.toFixed(2);
       }
 
     </script>
