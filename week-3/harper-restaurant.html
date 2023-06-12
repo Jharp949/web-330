@@ -19,6 +19,7 @@
     <!-- Links the stylesheet to the HTML document -->
     <link rel="stylesheet" href="../styles/site.css" type="text/css">
     <link rel="stylesheet" href="../styles/theme.css" type="text/css">
+    <link rel="stylesheet" href="./harper-restaurant.css" type="text/css">
     <!-- The link acquires the Roboto font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,24 +36,27 @@
       </span></i>
       <br>
       <h1 class="app-header">Welcome to the Restaurant App!</h1>
-
+<!-- Next four cards that have check box labels. -->
         <div class="assign-content">
           <div class="card">
             <div class="card-title">Restaurant Menu</div>
-            <div class="card-content" id="content-container">
+            <div class="card-content" id="content-container-one">
               <div class="card">
                 <div class="card-title">Beverages</div>
                 <div class="card-content">
                   <div class="form">
-                    <div class="form-field options" id="beverages">
-                      <label for="soda">Soda ($3.30)</label>
+                    <div class="form-field" id="beverages">
                       <input type="checkbox" name="soda" id="soda" value="3.30">
-                      <label for="sweetTea">Sweet Tea ($3.30)</label>
+                      <label for="soda">Soda ($3.30)</label>
+                      <br>
                       <input type="checkbox" name="sweetTea" id="sweetTea" value="3.30">
-                      <label for="icedCoffee">Iced Coffee ($2.19)</label>
+                      <label for="sweetTea">Sweet Tea ($3.30)</label>
+                      <br>
                       <input type="checkbox" name="icedCoffee" id="icedCoffee" value="2.19">
-                      <label for="bottledWater">Bottled Water ($2.15)</label>
+                      <label for="icedCoffee">Iced Coffee ($2.19)</label>
+                      <br>
                       <input type="checkbox" name="bottledWater" id="bottledWater" value="2.15">
+                      <label for="bottledWater">Bottled Water ($2.15)</label>
                     </div>
                   </div>
                 </div>
@@ -61,15 +65,18 @@
                 <div class="card-title">Appetizers</div>
                 <div class="card-content">
                   <div class="form">
-                    <div class="form-field options" id="appetizers">
-                      <label for="nachos">Nachos ($6.60)</label>
+                    <div class="form-field" id="appetizers">
                       <input type="checkbox" name="nachos" id="nachos" value="6.60">
-                      <label for="chipsSalsa">Chips and Salsa ($5.50)</label>
+                      <label for="nachos">Nachos ($6.60)</label>
+                      <br>
                       <input type="checkbox" name="chipsSalsa" id="chipsSalsa" value="5.50">
-                      <label for="pretzelCheese">Pretzel with Cheese ($8.80)</label>
+                      <label for="chipsSalsa">Chips and Salsa ($5.50)</label>
+                      <br>
                       <input type="checkbox" name="pretzelCheese" id="pretzelCheese" value="8.80">
-                      <label for="friedPickles">Fried Pickles ($8.25)</label>
+                      <label for="pretzelCheese">Pretzel with Cheese ($8.80)</label>
+                      <br>
                       <input type="checkbox" name="friedPickles" id="friedPickles" value="8.25">
+                      <label for="friedPickles">Fried Pickles ($8.25)</label>
                     </div>
                   </div>
                 </div>
@@ -78,15 +85,18 @@
                 <div class="card-title">Main Courses</div>
                 <div class="card-content">
                   <div class="form">
-                    <div class="form-field options" id="main-courses">
-                      <label for="streetTacos">Street Tacos ($9.70)</label>
+                    <div class="form-field" id="main-courses">
                       <input type="checkbox" name="streetTacos" id="streetTacos" value="9.70">
-                      <label for="bonelessWings">Boneless Wings ($12.80)</label>
+                      <label for="streetTacos">Street Tacos ($9.70)</label>
+                      <br>
                       <input type="checkbox" name="bonelessWings" id="bonelessWings" value="12.80">
-                      <label for="burgerFries">Cheese Burger with Fries ($12.65)</label>
+                      <label for="bonelessWings">Boneless Wings ($12.80)</label>
+                      <br>
                       <input type="checkbox" name="burgerFries" id="burgerFries" value="12.65">
-                      <label for="chickenWrapSalad">Chicken Wrap with Salad ($9.65)</label>
+                      <label for="burgerFries">Cheese Burger with Fries ($12.65)</label>
+                      <br>
                       <input type="checkbox" name="chickenWrapSalad" id="chickenWrapSalad" value="9.65">
+                      <label for="chickenWrapSalad">Chicken Wrap with Salad ($9.65)</label>
                     </div>
                   </div>
                 </div>
@@ -95,21 +105,24 @@
                 <div class="card-title">Desserts</div>
                 <div class="card-content">
                   <div class="form">
-                    <div class="form-field options" id="desserts">
-                      <label for="iceCream">Ice Cream ($4.30)</label>
+                    <div class="form-field" id="desserts">
                       <input type="checkbox" name="iceCream" id="iceCream" value="4.30">
-                      <label for="chocolateCake">Chocolate Cake ($5.40)</label>
+                      <label for="iceCream">Ice Cream ($4.30)</label>
+                      <br>
                       <input type="checkbox" name="chocolateCake" id="chocolateCake" value="5.40">
-                      <label for="applePie">Apple Pie ($3.30)</label>
+                      <label for="chocolateCake">Chocolate Cake ($5.40)</label>
+                      <br>
                       <input type="checkbox" name="applePie" id="applePie" value="3.30">
-                      <label for="pudding">Pudding ($3.10)</label>
+                      <label for="applePie">Apple Pie ($3.30)</label>
+                      <br>
                       <input type="checkbox" name="pudding" id="pudding" value="3.10">
+                      <label for="pudding">Pudding ($3.10)</label>
                     </div>
                   </div>
                 </div>
               </div>
           </div>
-          <div class="card-content">
+          <div class="btn">
             <button class= "btn-primary full-width" id="btnOrder">Place Order</button>
           </div>
         </div>
@@ -182,9 +195,9 @@
     <!-- Imports JS files to the HTML document -->
     <script type='module'>
       import { Bill, Beverage, Appetizer, MainCourse, Dessert } from './index.js';
-
+      //assigns onclick event function to the button with id of btnOrder.
       document.getElementById('btnOrder').onclick = function() {
-
+        //Variables that parse through each selected id. Then add the selected input to a variable.
         const beveragesEl = document.getElementById('beverages');
         const beverages = beveragesEl.getElementsByTagName('input');
         const appetizersEl = document.getElementById('appetizers');
@@ -193,9 +206,9 @@
         const mainCourses = mainCoursesEl.getElementsByTagName('input');
         const dessertsEl = document.getElementById('desserts');
         const desserts = dessertsEl.getElementsByTagName('input');
-
+        //new class based on the class from harper-bill.js
         let bill = new Bill(beverages, appetizers, mainCourses, desserts);
-
+        //for loop which adds the value of each checked box to the total variable.
         for (let beverage of beverages) {
           if (beverage.checked) {
             bill.addBeverage(new Beverage(beverage.name, beverage.value));
@@ -219,9 +232,9 @@
             bill.addDessert(new Dessert(dessert.name, dessert.value));
           }
         }
-
+        //Function that calls getTotal from harper-bill.js.
         let total = bill.getTotal();
-
+        //assigns the total value to the element with an id of order-total.
         document.getElementById('order-total').innerHTML = 'Your order total is $' + total.toFixed(2);
       }
 

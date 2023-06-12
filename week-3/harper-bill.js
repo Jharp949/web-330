@@ -3,6 +3,7 @@
 //Date: 6/10/2023
 //Description: Web 330 - Assignment 3.2
 
+//Creates a new class to reference within this file.
 export class Bill {
   constructor(_beverages, _appetizers, _mainCourses, _desserts) {
     this._beverages = [];
@@ -10,23 +11,23 @@ export class Bill {
     this._mainCourses = [];
     this._desserts = [];
   }
-
+//Function that adds the user selected beverage choice.
   addBeverage(beverage) {
     this._beverages.push(beverage);
   }
-
+//Function that adds the user selected appetizer choice.
   addAppetizer(appetizer) {
     this._appetizers.push(appetizer);
   }
-
+//Function that adds the user selected mainCourse choice.
   addMainCourse(mainCourse) {
     this._mainCourses.push(mainCourse);
   }
-
+//Function that adds the user selected dessert choice.
   addDessert(dessert) {
     this._desserts.push(dessert);
   }
-
+//Function that references the price of each item and adds it to a variable for the total.
   getTotal() {
     let total = 0;
 
