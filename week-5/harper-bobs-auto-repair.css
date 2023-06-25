@@ -4,3 +4,21 @@
   Date: 6/23/2023
   Description: Web 330 - Assignment 5.2
 */
+
+@import url("../styles/theme.css");
+
+#cart-message{
+  float: right;
+  color: #df546a;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+i:hover{
+  cursor: pointer;
+}
+
+#cartIcon, #cart-count{
+  color: var(--anchor-hover-color);
+  font-size: 30px;
+}
