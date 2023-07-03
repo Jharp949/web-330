@@ -1,0 +1,234 @@
+<!--
+  Title: harper-bobs-auto-repair.html
+  Author: James Harper
+  Date: 6/23/2023
+  Description: Web 330 - Assignment 5.2
+-->
+<!-- Establishes the type of document -->
+<!DOCTYPE html>
+<!-- Sets the document type as HTML in english -->
+<html lang="en">
+<!-- Defines the metadata information such as document title, character set, styles, scripts,
+  and other meta information.
+-->
+  <head>
+    <!-- Defines the title of the document -->
+    <title>WEB 330 - Enterprise Javascript II: Assignment 5.2</title>
+    <!-- Links the stylesheet to the HTML document -->
+    <link rel="stylesheet" href="../styles/site.css" type="text/css">
+    <link rel="stylesheet" href="../styles/theme.css" type="text/css">
+    <link rel="stylesheet" href="../styles/flex-layout.css" type="text/css">
+    <link rel="stylesheet" href="./harper-future-value.css" type="text/css">
+    <!-- The link acquires the Roboto font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="../scripts/theme.js"></script>
+
+  </head>
+
+  <body class="light-theme">
+
+    <div class="assign-container">
+      <i onclick="toggleMode(this)" id="icon-mode" class="fa fa-toggle-off pull-right" style="font-size: 28px;"><span id="icon-text">
+      </span></i>
+      <br>
+      <h1 class="app-header">Welcome to the Future Value App!</h1>
+
+        <div class="assign-content">
+          <div class="card">
+            <div class="card-title">Future Value Calculator</div>
+            <div class="danger" id="errorLog"></div>
+            <div class="card-content">
+              <div class="form">
+                <div class="form-field row">
+                  <label for="txtMonthlyPayment" class="col-5 form-label">Monthly Payment:</label>
+                  <input type="text" class="input col-7" id="txtMonthlyPayment">
+                </div>
+                <div class="form-field row">
+                  <label for="txtYearlyRate" class="col-5 form-label">Interest Rate:</label>
+                  <input type="text" class="input col-7" id="txtYearlyRate">
+                </div>
+                <div class="instructions">
+                  <i class="danger">Enter 11% as 11.1</i>
+                </div>
+              </div>
+              <div class="form-field row">
+                <label for="listNumOfYears" class="col-5 form-label">Number of Years:</label>
+                <select id="listNumOfYears" class="drop-down-menu col-3">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+
+              </div>
+              <div class="form-field">
+                <button class="btn btn-primary full-width" id="btnCalculate">Calculate</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="assign-container">
+      <div class="assign-content">
+        <div class="card">
+          <div class="card-title">Calculation as of <span id="today"></span></div>
+            <div class="card-content" id="assign-header">
+            </div>
+            <div class="card-content assign-results-text" id="futureValue">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="link-container">
+      <!-- Clickable link to return home directory on GitHub. -->
+      <a href="https://Jharp949.github.io/web-330" class="return-home">Return</a>
+    </div>
+
+    <script type="module">
+      //Import FinanceCalculator and Validator
+      import { FinanceCalculator } from "./harper-finance-calculator.js";
+      import { Validator } from "./harper-validator.js";
+
+      //Set the current date to the results.
+      document.getElementById("today").innerHTML = new Date().toLocaleDateString("en-US");
+
+      //onclick function for the calculate button.
+      document.getElementById("btnCalculate").onclick = function() {
+        //Variables that hold the user input for each parameter.
+        let monthlyPayment = document.getElementById("txtMonthlyPayment").value;
+        let rate = document.getElementById("txtYearlyRate").value;
+        let years = document.getElementById("listNumOfYears").value;
+        let errorLogEl = document.getElementById("errorLog");
+        let monthlyPaymentValidator = new Validator("Monthly Payment", monthlyPayment);
+
+        //Functions for the calculations and messages displayed.
+        monthlyPaymentValidator.addRequiredField();
+        monthlyPaymentValidator.addRequiredFloatField();
+        monthlyPaymentValidator.addFloatMinField(100);
+
+        //Calculate the rate based on user input.
+        let rateValidator = new Validator("Interest Rate", rate);
+        rateValidator.addRequiredField();
+        rateValidator.addRequiredFloatField();
+        rateValidator.addFloatMaxField(100);
+
+        //empty error log array
+        let errorLog = [];
+
+        //If the monthly payment validator does not validate
+        if(!monthlyPaymentValidator.validate()) {
+
+            for(let message of monthlyPaymentValidator.messages){
+
+                  errorLog.push(message);
+            }
+        }
+
+        //If the rate validator does not validate
+        if(!rateValidator.validate()) {
+          //For ever message in the validator object
+          for(let message of rateValidator.messages){
+            //Push a message onto the error log array
+            errorLog.push(message);
+          }
+        }
+
+        //If both validators properly validate
+        if(monthlyPaymentValidator.validate() && rateValidator.validate()) {
+          //Set the HTML of the error log element to a blank string
+          errorLogEl.innerHTML = "";
+
+          //Calculate the future value
+          let futureValue = FinanceCalculator.calculateFutureValue(monthlyPayment, rate, years);
+
+          //Format the results with commas
+          let obj1 = new Intl.NumberFormat('en-US');
+          let output = obj1.format(futureValue);
+
+          //Display the future value to the document
+          document.getElementById("futureValue").innerHTML = `The future value is $${output}`;
+        } else {
+          //Otherwise, set the HTML of the error log element to a blank string
+          errorLogEl.innerHTML = '';
+
+          //Declare an error log message variable that begins an HTML unordered list
+          let errorLogMessage = `<ul>`;
+
+          //For every error in the error log
+          for(let error of errorLog){
+            //Add a list item with the error to the list
+            errorLogMessage += `<li>${error}</li>`;
+          }
+
+          //Close the HTML unordered list
+          errorLogMessage += `</ul>`
+
+          //Display the error log messages
+          document.getElementById("errorLog").innerHTML = errorLogMessage;
+        }
+      }
+
+    </script>
+
+    <script>
+      /**
+      * Set the default theme to light if one has not been set in the browsers localStorage
+      */
+      setDefaultTheme();
+
+      /**
+       * Function to switch the users selected website theme
+       * @param x (this instance)
+       */
+      function toggleMode(x)
+      {
+          let colorTheme = document.body.classList; // get the body's CSS class
+          let iconMode = x.classList; // get the current classes assigned to the triggered button
+
+          /**
+           * If the current body class is set to the light-theme, update the user's preference to the dark-theme in the browsers
+           * local storage.
+           */
+          if (colorTheme.value === "light-theme")
+          {
+              localStorage.clear();
+              localStorage.setItem("mode", "dark-theme");
+              localStorage.setItem("iconMode", "fa-toggle-on");
+              localStorage.setItem("iconText", "Dark Mode");
+          }
+          /**
+           * If the current body class is set to the dark-theme, update the user's preference to the light-theme in the browsers
+           * local storage.
+           */
+          else
+          {
+              localStorage.clear();
+              localStorage.setItem("mode", "light-theme");
+              localStorage.setItem("iconMode", "fa-toggle-off");
+              localStorage.setItem("iconText", "Light Mode");
+          }
+
+          /**
+           * Apply the updated selection to the HTML page elements
+           */
+          colorTheme.value = localStorage.getItem("mode");
+          iconMode.value = `fa ${localStorage.getItem("iconMode")} pull-right`;
+          document.getElementById("icon-text").innerHTML = localStorage.getItem("iconText");
+      }
+    </script>
+
+  </body>
+</html>
