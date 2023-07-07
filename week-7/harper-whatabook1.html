@@ -64,7 +64,97 @@
 
     <script type="module">
 
+      addEventListener("DOMContentLoaded", (event) => {
+        const fileName = 'harper-books.xml';
 
+        fetch(fileName)
+        .then(res => res.text())
+        .then(data => {
+          let domParser = new DOMParser();
+          let xmlBooks = domParser.parseFromString(data, 'text/xml');
+
+          loadBooks(xmlBooks);
+
+          addIsbnClickEvents();
+
+          loadBooks(xml); {
+            let books = xml.getElementsByTagName('book');
+            let tableData = `
+              <table class="table" id="bookTable">
+                <tr>
+                  <th>ISBN</th>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Pages</th>
+                  <th>Authors</th>
+                </tr>
+              <tbody>
+            `;
+
+            for (let book of books) {
+              let isbn = book.getElementsByTagName("isbn")[0].childNodes[0].nodeValue;
+              let title = book.getElementsByTagName("title")[0].childNodes[0].nodeValue;
+              let description = book.getElementsByTagName("description")[0].childNodes[0].nodeValue;
+              let pages = book.getElementsByTagName("pages")[0].childNodes[0].nodeValue;
+              let author = book.getElementsByTagName("authors")[0].childNodes[0].nodeValue;
+
+              tableData += `
+                <tr>
+                  <td data-value="ISBN: "><a href="#" class="isbn-link">${isbn}</a></td>
+                  <td data-value="Title: ">${title}</td>
+                  <td data-value="Description: ">${description}</td>
+                  <td data-value="Pages: ">${pages}</td>
+                  <td data-value="Authors: ">${author}</td>
+                </tr>
+                `;
+            }
+
+            tableData += `
+                </tbody>
+              </table>
+            `;
+          }
+        })
+      });
+
+      function anchorClicked(e) {
+        //Prevent default
+        e.preventDefault();
+
+        //Get data from the table
+        let self = this;
+        let cell = self.parentElement;
+        let row = cell.parentElement;
+        let data = row.querySelectorAll("td");
+
+        //Declare a string starting an HTML unordered list
+        let bookData = `<ul style="list-style-type: none">`;
+
+        //For each field of data
+        for(let field of data){
+          //Append a list item to the table string
+          bookData += `<li><b>${field.dataset.value}</b>${field.innerText}</li>`;
+        }
+
+        //Close the unordered list
+        bookData += `</ul>`;
+
+        //Display the list data to the HTML page
+        document.getElementById("selectedBook").innerHTML = bookData;
+      }
+
+        //Declare a function to add isbn click events
+      function addIsbnClickEvents(){
+
+        //Declare a variable to select the table body
+        let viewButtons = document.querySelectorAll("#bookTable tbody .isbn-link");
+
+        //For each item in viewButtons:
+        for(let x = 0; x < viewButtons.length; x++){
+          //Create an onclick event listening to each isbn button
+          viewButtons[x].addEventListener("click", anchorClicked);
+        }
+      }
 
     </script>
 
