@@ -76,8 +76,10 @@
           loadBooks(xmlBooks);
 
           addIsbnClickEvents();
+        })
+      });
 
-          loadBooks(xml); {
+      loadBooks(xml); {
             let books = xml.getElementsByTagName('book');
             let tableData = `
               <table class="table" id="bookTable">
@@ -114,8 +116,6 @@
               </table>
             `;
           }
-        })
-      });
 
       function anchorClicked(e) {
         //Prevent default
