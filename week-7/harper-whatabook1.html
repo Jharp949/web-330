@@ -64,8 +64,8 @@
 
     <script type="module">
 
-      addEventListener("DOMContentLoaded", (event) => {
-        const fileName = 'harper-books.xml';
+      addEventListener('DOMContentLoaded', (event) => {
+        let fileName = 'harper-books.xml';
 
         fetch(fileName)
         .then(res => res.text())
@@ -79,7 +79,7 @@
         })
       });
 
-      loadBooks(xml); {
+      function loadBooks(xml) {
             let books = xml.getElementsByTagName('book');
             let tableData = `
               <table class="table" id="bookTable">
@@ -115,6 +115,8 @@
                 </tbody>
               </table>
             `;
+
+            document.getElementById("bookList").innerHTML = tableData;
           }
 
       function anchorClicked(e) {
