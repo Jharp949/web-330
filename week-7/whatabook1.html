@@ -35,37 +35,38 @@
       <i onclick="toggleMode(this)" id="icon-mode" class="fa fa-toggle-off pull-right" style="font-size: 28px;"><span id="icon-text">
       </span></i>
       <br>
-      <h1 class="app-header">Welcome to the WhatABook, Part 1 App!</h1>
+      <div class="assign-container">
+        <h1 class="app-header">Welcome to the Whatabook, Part 1 App</h1>
+        <div class="assign-content">
 
-      <div class="assign-content">
+          <div class="card">
+            <div class="card-title">Book Listing</div>
 
-        <div class="card">
-          <div class="card-title">Book Listing</div>
-
-          <div class="card-content" id="bookList"></div>
+            <div class="card-content" id="bookList"></div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="assign-container">
-      <div class="assign-content">
-        <div class="card">
-          <div class="card-title">Selected Book</div>
-            <div class="card-content" id="selectedBook">
+      <div class="assign-container">
+        <div class="assign-content">
+
+          <div class="card">
+            <div class="card-title ">Selected Book</div>
+
+              <div class="card-content" id="selectedBook">
+              </div>
             </div>
-        </div>
-      </div>
-    </div>
+          </div>
 
     <div id="link-container">
-      <!-- Clickable link to return home directory on GitHub. -->
+      <!-- Clickable link to return to the home directory on GitHub. -->
       <a href="https://Jharp949.github.io/web-330" class="return-home">Return</a>
     </div>
 
     <script type="module">
 
       addEventListener('DOMContentLoaded', (event) => {
-        let fileName = 'harper-books.xml';
+        let fileName = 'books.xml';
 
         fetch(fileName)
         .then(res => res.text())
@@ -94,11 +95,11 @@
             `;
 
             for (let book of books) {
-              let isbn = book.getElementsByTagName("isbn")[0].childNodes[0].nodeValue;
-              let title = book.getElementsByTagName("title")[0].childNodes[0].nodeValue;
-              let description = book.getElementsByTagName("description")[0].childNodes[0].nodeValue;
-              let pages = book.getElementsByTagName("pages")[0].childNodes[0].nodeValue;
-              let author = book.getElementsByTagName("authors")[0].childNodes[0].nodeValue;
+              let isbn = book.getElementsByTagName('isbn')[0].childNodes[0].nodeValue;
+              let title = book.getElementsByTagName('title')[0].childNodes[0].nodeValue;
+              let description = book.getElementsByTagName('description')[0].childNodes[0].nodeValue;
+              let pages = book.getElementsByTagName('pages')[0].childNodes[0].nodeValue;
+              let author = book.getElementsByTagName('authors')[0].childNodes[0].nodeValue;
 
               tableData += `
                 <tr>
@@ -115,7 +116,7 @@
                 </tbody>
               </table>
             `;
-
+console.log(tableData);
             document.getElementById("bookList").innerHTML = tableData;
           }
 
