@@ -5,8 +5,6 @@ Date: 7/6/2023
 Description: Web 330 - Assignment 7.2
 -->
 
-<?xml version="1.0" encoding="UTF-8"?>
-
 <books>
   <book>
     <isbn>9780345339683</isbn>
