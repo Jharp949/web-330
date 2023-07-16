@@ -1,0 +1,243 @@
+<!--
+  Title: harper-whatabook2.html
+  Author: James Harper
+  Date: 7/14/2023
+  Description: Web 330 - Assignment 7.2
+-->
+<!-- Establishes the type of document -->
+<!DOCTYPE html>
+<!-- Sets the document type as HTML in english -->
+<html lang="en">
+<!-- Defines the metadata information such as document title, character set, styles, scripts,
+  and other meta information.
+-->
+  <head>
+    <!-- Defines the title of the document -->
+    <title>WEB 330 - Enterprise Javascript II: Assignment 8.2</title>
+    <!-- Links the stylesheet to the HTML document -->
+    <link rel="stylesheet" href="../styles/site.css" type="text/css">
+    <link rel="stylesheet" href="../styles/theme.css" type="text/css">
+    <link rel="stylesheet" href="../styles/flex-layout.css" type="text/css">
+    <!-- The link acquires the Roboto font from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <script src="../scripts/theme.js"></script>
+
+  </head>
+
+  <body class="light-theme">
+
+    <div class="assign-container">
+      <i onclick="toggleMode(this)" id="icon-mode" class="fa fa-toggle-off pull-right" style="font-size: 28px;"><span id="icon-text">
+      </span></i>
+      <br>
+      <div class="assign-container">
+        <h1 class="app-header">Welcome to the Whatabook, Part 2 App</h1>
+        <div class="assign-content">
+          <div class="card">
+            <div class="card-title">Book Listing</div>
+            <div class="card-content" id="bookListing"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <div class="assign-container">
+        <div class="assign-content">
+          <div class="card">
+            <div class="card-title ">Selected Book</div>
+              <div class="card-content" id="selectedBook"></div>
+          </div>
+        </div>
+      </div>
+
+    <div id="link-container">
+      <!-- Clickable link to return to the home directory on GitHub. -->
+      <a href="https://Jharp949.github.io/web-330" class="return-home">Return</a>
+    </div>
+
+  <script type="module">
+//imports from http-client.js
+    import { HttpClient } from "./http-client.js";
+
+    //Function that selects all clickable events
+    function addIsbnClickEvents() {
+      //Variable for holding click values
+      let viewButtons = document.querySelectorAll("#bookListing tbody .isbn-link");
+
+      //Loop that creates an onclick event listener for each isbn button.
+      for (let x = 0; x < viewButtons.length; x++) {
+          viewButtons[x].addEventListener("click", getBook);
+      }
+    }
+
+    //Declare a new http client.
+    let http = new HttpClient();
+
+    //Array holding isbn numbers.
+    const isbns = [
+      "0345339681",
+      "0261103571",
+      "9780593099322",
+      "9780261102361",
+      "9780261102378",
+      "9780590302715",
+      "9780316769532",
+      "9780743273565",
+      "9780590405959"
+    ];
+
+    //Assign params
+    const params = {
+      "bibkeys": `ISBN:${isbns.join(',')}`,
+      "format": "json",
+      "jscmd": "details"
+    };
+
+    //Calls http.get with a then and catch clause
+    http.get("https://openlibrary.org/api/books", params).then(res => {
+
+      console.log(res);
+      document.getElementById("bookListing").innerHTML = buildHtmlString(res, "table");
+      addIsbnClickEvents();
+    })
+    .catch(e => {
+      console.log(e);
+    });
+
+    function getBook(e) {
+      e.preventDefault();
+      let self = this;
+      let isbn = self.innerText;
+      const params = {
+        "bibkeys": `ISBN:${isbn}`,
+        "format": "json",
+        "jscmd": "details"
+      };
+
+      http.get("https://openlibrary.org/api/books", params).then(res => {
+        document.getElementById("selectedBook").innerHTML = buildHtmlString(res, "ul");
+      })
+      .catch(e => {
+        console.log(e);
+      })
+    }
+//function for building a table that holds the client info.
+    function buildHtmlString(res, format) {
+      let tableHeader = `
+        <table>
+          <tr>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Pages</th>
+            <th>Authors</th>
+          </tr>
+        `;
+
+      let ulString = "";
+
+    for (let key in res) {
+      ulString += `<ul style="list-style-type: none;">`;
+
+      if (res.hasOwnProperty(key)) {
+          let authors = [];
+
+          if (res[key].details.authors) {
+            authors = res[key].details.authors.map(function (author) {
+              return author.name;
+            })
+          }
+
+          let book = {
+            isbn: res[key].details.isbn_13 ? res[key].details.isbn_13 : res[key].details.isbn_10,
+            title: res[key].details.title,
+            description: res[key].details.subtitle ? res[key].details.subtitle : "N/A",
+            pages: res[key].details.number_of_pages ? res[key].details.number_of_pages : "N/A",
+            authors: authors.join(",")
+          }
+
+          ulString += `
+            <li><b>ISBN: </b> ${book.isbn}</li>
+            <li><b>Title:</b> ${book.title}</li>
+            <li><b>Description: </b> ${book.description}</li>
+            <li><b>Pages: </b> ${book.pages}</li>
+            <li><b>Authors: </b> ${book.authors}</li>
+            </ul>
+          `;
+
+          tableHeader += `
+            <tr>
+            <td><a href="#" class="isbn-link">${book.isbn}</a></td>
+            <td>${book.title}</td>
+            <td>${book.description}</td>
+            <td>${book.pages}</td>
+            <td>${book.authors}</td>
+            </tr>
+          `;
+        }
+      }
+
+      tableHeader += `</table>`;
+
+      if (format == "table") {
+            return tableHeader;
+      } else {
+            return ulString;
+      }
+    }
+
+  </script>
+
+    <script>
+      /**
+      * Set the default theme to light if one has not been set in the browsers localStorage
+      */
+      setDefaultTheme();
+
+      /**
+       * Function to switch the users selected website theme
+       * @param x (this instance)
+       */
+      function toggleMode(x)
+      {
+          let colorTheme = document.body.classList; // get the body's CSS class
+          let iconMode = x.classList; // get the current classes assigned to the triggered button
+
+          /**
+           * If the current body class is set to the light-theme, update the user's preference to the dark-theme in the browsers
+           * local storage.
+           */
+          if (colorTheme.value === "light-theme")
+          {
+              localStorage.clear();
+              localStorage.setItem("mode", "dark-theme");
+              localStorage.setItem("iconMode", "fa-toggle-on");
+              localStorage.setItem("iconText", "Dark Mode");
+          }
+          /**
+           * If the current body class is set to the dark-theme, update the user's preference to the light-theme in the browsers
+           * local storage.
+           */
+          else
+          {
+              localStorage.clear();
+              localStorage.setItem("mode", "light-theme");
+              localStorage.setItem("iconMode", "fa-toggle-off");
+              localStorage.setItem("iconText", "Light Mode");
+          }
+
+          /**
+           * Apply the updated selection to the HTML page elements
+           */
+          colorTheme.value = localStorage.getItem("mode");
+          iconMode.value = `fa ${localStorage.getItem("iconMode")} pull-right`;
+          document.getElementById("icon-text").innerHTML = localStorage.getItem("iconText");
+      }
+    </script>
+
+  </body>
+</html>
